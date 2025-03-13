@@ -1,8 +1,8 @@
 import random
 
 
-from .models.bump_chart_model import BumpChartModel
-from .views.bump_chart_view import BumpChartView
+from .bump_chart_model import BumpChartModel
+from .bump_chart_view import BumpChartView
 
 
 def generate_bump_chart():

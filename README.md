@@ -16,8 +16,10 @@ You can easily create your own bot based on this one following the steps below. 
     - A GitHub Actions repository variable `BLUESKY_USERNAME`: The username for your Bluesky account. Don't include the @ at the start of the name, but do include '.bsky.social' or the domain you use for your account
 
 ## Local env setup
-1. run `pip install -r requirements.txt`
-2. run `pre-commit install`
+1. Run `pip install -r requirements.txt`
+2. Run `pre-commit install`
 
-## Generate bump chart (from fake data)
-run `python generate_bump_chart.py`
+## Generate bump chart (from fake data currently)
+1. From the project root directory
+2. Run `python scripts/generate_chart.py`
+3. View image in `./images`

@@ -5,7 +5,7 @@ import seaborn
 import textwrap
 
 
-from bump_chart.models.bump_chart_model import BumpChartModel
+from bump_chart.bump_chart_model import BumpChartModel
 from typing import Tuple
 
 
