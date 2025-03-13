@@ -1,11 +1,11 @@
 import random
 
 
-from bump_chart_model import BumpChartModel
-from bump_chart_view import BumpChartView
+from .models.bump_chart_model import BumpChartModel
+from .views.bump_chart_view import BumpChartView
 
 
-if __name__ == "__main__":
+def generate_bump_chart():
     sample_data = {
         "date": ["2025-02-21", "2025-02-28", "2025-03-07"],
         "Institute of Development Studies": [6005, 8000, 8500],
@@ -21,19 +21,6 @@ if __name__ == "__main__":
     }
 
     model = BumpChartModel(sample_data)
-    # palette generated using: https://mokole.com/palette.html
-    test_pallet_bright = [
-        "#117411",
-        "#2244ff",
-        "#b03060",
-        "#ff0000",
-        "#ffff00",
-        "#00ff00",
-        "#00dddd",
-        "#ff00dd",
-        "#6495ed",
-        "#dddead",
-    ]
 
     test_pallet_muted = [
         "#167288",  # blues

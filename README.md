@@ -15,6 +15,9 @@ You can easily create your own bot based on this one following the steps below. 
     - A GitHub Actions repository secret `BLUESKY_APP_PASSWORD`: The app password you created in Bluesky
     - A GitHub Actions repository variable `BLUESKY_USERNAME`: The username for your Bluesky account. Don't include the @ at the start of the name, but do include '.bsky.social' or the domain you use for your account
 
-## local Development
+## Local env setup
 1. run `pip install -r requirements.txt`
 2. run `pre-commit install`
+
+## Generate bump chart (from fake data)
+run `python generate_bump_chart.py`
