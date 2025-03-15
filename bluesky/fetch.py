@@ -5,7 +5,7 @@ from atproto_client.models.app.bsky.actor.defs import ProfileViewDetailed
 import pandas as pd
 
 OUTPUT_DIR = "data"
-OUTPUT_FILENAME = "thinktanks_bluesky.json"
+OUTPUT_FILENAME = "thinktanks_bluesky.csv"
 
 
 def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
@@ -40,13 +40,14 @@ def get_bluesky_data(
     )
 
     # Add current date
-    df["date"] = pd.Timestamp.now().date().strftime('%Y-%m-%d')
+    df["date"] = pd.Timestamp.now().date()
 
-    # Save to JSON
+    # Save to CSV
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_path = os.path.join(OUTPUT_DIR, OUTPUT_FILENAME)
-    df.to_json(
+    df.to_csv(
         output_path,
-        orient="records",
+        index=False,
+        mode="a",
     )
     print(f"Data saved at {output_path}")
