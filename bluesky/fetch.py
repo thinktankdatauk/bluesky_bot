@@ -1,6 +1,11 @@
+import os
+
 from atproto import Client
 from atproto_client.models.app.bsky.actor.defs import ProfileViewDetailed
 import pandas as pd
+
+OUTPUT_DIR = "data"
+OUTPUT_FILENAME = "thinktanks_bluesky.json"
 
 
 def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
@@ -16,7 +21,10 @@ def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
     }
 
 
-def get_bluesky_data(client: Client, df: pd.DataFrame) -> pd.DataFrame:
+def get_bluesky_data(
+    client: Client,
+    df: pd.DataFrame,
+) -> pd.DataFrame:
     """Get data from Bluesky API for a given handle"""
 
     df[[
@@ -35,7 +43,10 @@ def get_bluesky_data(client: Client, df: pd.DataFrame) -> pd.DataFrame:
     df["date"] = pd.Timestamp.now().date()
 
     # Save to JSON
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    output_path = os.path.join(OUTPUT_DIR, OUTPUT_FILENAME)
     df.to_json(
-        "../data/thinktanks_bluesky.json",
+        output_path,
         orient="records",
     )
+    print(f"Data saved at {output_path}")
