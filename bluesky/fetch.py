@@ -8,7 +8,7 @@ OUTPUT_DIR = "data"
 OUTPUT_FILENAME = "thinktanks_bluesky.csv"
 
 
-def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
+def get_bluesky_profile(client: Client, handle: str) -> ProfileViewDetailed:
     """Get data from Bluesky API for a given handle"""
     data = client.get_profile(actor=handle)
 
@@ -21,11 +21,11 @@ def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
     }
 
 
-def get_bluesky_data(
+def download_bluesky_data(
     client: Client,
     df: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Get data from Bluesky API for a given handle"""
+    """Retrieve Bluesky data for rows of a df and save to CSV"""
 
     df[[
         "did",
@@ -34,7 +34,7 @@ def get_bluesky_data(
         "posts_count",
         "followers_count",
     ]] = df.apply(
-        lambda x: call_bluesky_api(client, x["handle"]),
+        lambda x: get_bluesky_profile(client, x["handle"]),
         axis="columns",
         result_type="expand",
     )
