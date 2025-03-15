@@ -1,10 +1,8 @@
-# %%
 from atproto import Client
 from atproto_client.models.app.bsky.actor.defs import ProfileViewDetailed
 import pandas as pd
 
 
-# %%
 def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
     """Get data from Bluesky API for a given handle"""
     data = client.get_profile(actor=handle)
@@ -18,7 +16,6 @@ def call_bluesky_api(client: Client, handle: str) -> ProfileViewDetailed:
     }
 
 
-# %%
 def get_bluesky_data(client: Client, df: pd.DataFrame) -> pd.DataFrame:
     """Get data from Bluesky API for a given handle"""
 
