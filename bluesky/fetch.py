@@ -40,7 +40,7 @@ def get_bluesky_data(
     )
 
     # Add current date
-    df["date"] = pd.Timestamp.now().date()
+    df["date"] = pd.Timestamp.now().date().strftime('%Y-%m-%d')
 
     # Save to JSON
     os.makedirs(OUTPUT_DIR, exist_ok=True)
