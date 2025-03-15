@@ -5,7 +5,7 @@ from atproto_client.models.app.bsky.actor.defs import ProfileViewDetailed
 import pandas as pd
 
 OUTPUT_DIR = "data"
-OUTPUT_FILENAME = "thinktanks_bluesky.csv"
+OUTPUT_FILENAME = "thinktanks_bluesky_data.csv"
 
 
 def get_bluesky_profile(client: Client, handle: str) -> ProfileViewDetailed:
