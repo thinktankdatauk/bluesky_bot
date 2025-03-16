@@ -27,13 +27,15 @@ def download_bluesky_data(
 ) -> pd.DataFrame:
     """Retrieve Bluesky data for rows of a df and save to CSV"""
 
-    df[[
-        "did",
-        "display_name",
-        "created_at",
-        "posts_count",
-        "followers_count",
-    ]] = df.apply(
+    df[
+        [
+            "did",
+            "display_name",
+            "created_at",
+            "posts_count",
+            "followers_count",
+        ]
+    ] = df.apply(
         lambda x: get_bluesky_profile(client, x["handle"]),
         axis="columns",
         result_type="expand",
