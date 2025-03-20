@@ -54,5 +54,6 @@ class BlueskyFetcher:
             output_path,
             index=False,
             mode="a",
+            header=not os.path.exists(output_path),
         )
         print(f"Data saved at {output_path}")
