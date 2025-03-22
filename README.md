@@ -14,6 +14,7 @@ You can easily create your own bot based on this one following the steps below. 
 1. **Add secrets and variables to your GitHub repo**. In your repo's _Settings_, create:
     - A GitHub Actions repository secret `BLUESKY_APP_PASSWORD`: The app password you created in Bluesky
     - A GitHub Actions repository variable `BLUESKY_USERNAME`: The username for your Bluesky account. Don't include the @ at the start of the name, but do include '.bsky.social' or the domain you use for your account
+1. **Configure GitHub Actions** Modify [call_api.yaml](.github\workflows\call_api.yaml) - a YAML file that controls how the bot should run on GitHub Actions. By changing the `cron` line you can change the frequency with which the bot calls pulls in data using the Bluesky API (a handy tool for working out how to set `cron` schedules is [Crontab Guru](https://crontab.guru/)).
 
 ## Local env setup
 1. Run `pip install -r requirements.txt`
@@ -23,3 +24,7 @@ You can easily create your own bot based on this one following the steps below. 
 1. From the project root directory
 2. Run `python scripts/generate_chart.py`
 3. View image in `./images`
+
+## Pull in Bluesky follower counts
+1. From the project root directory, run `python scripts/call_api.py`
+3. View data in `./data/thinktanks_bluesky_data.csv`
