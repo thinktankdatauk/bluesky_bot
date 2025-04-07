@@ -22,9 +22,9 @@ You can easily create your own bot based on this one following the steps below. 
 
 ## Generate bump chart (from fake data currently)
 1. From the project root directory
-2. Run `python scripts/generate_chart.py`
+2. Run `python generate_chart.py`
 3. View image in `./images`
 
 ## Pull in Bluesky follower counts
-1. From the project root directory, run `python scripts/call_api.py`
+1. From the project root directory, run `python call_api.py`
 1. View data in `./data/thinktanks_bluesky_data.csv`
