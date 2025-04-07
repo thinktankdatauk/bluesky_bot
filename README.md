@@ -18,7 +18,8 @@ You can easily create your own bot based on this one following the steps below. 
 
 ## Local env setup
 1. Run `pip install -r requirements.txt`
-2. Run `pre-commit install`
+1. Run `pre-commit install`
+1. Copy [`.env.example`](.env.example) and rename the copy `.env`. Replace '`xxxxxxxxxxx`' in the file with [the app password you created in Bluesky and the username for your Bluesky account](#steps).
 
 ## Generate bump chart (from fake data currently)
 1. From the project root directory
