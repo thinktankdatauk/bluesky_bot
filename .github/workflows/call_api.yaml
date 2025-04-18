@@ -21,6 +21,6 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run script
       env:
-        BLUESKY_USERNAME: ${{ env.BLUESKY_USERNAME }}
+        BLUESKY_USERNAME: ${{ vars.BLUESKY_USERNAME }}
         BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
       run: python call_api.py
