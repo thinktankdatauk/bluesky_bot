@@ -21,6 +21,15 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run script
       env:
-        BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+        BLUESKY_USERNAME: ${{ vars.BLUESKY_USERNAME }}
         BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
       run: python call_api.py
+    - name: Commit and push if the data has changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Update data: ${timestamp}" || exit 0
+        git push
+          
