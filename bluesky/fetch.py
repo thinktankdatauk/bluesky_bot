@@ -1,6 +1,7 @@
 import os
 
 from atproto import Client
+from atproto_client.exceptions import BadRequestError
 import pandas as pd
 
 OUTPUT_DIR = "data"
@@ -17,7 +18,18 @@ class BlueskyFetcher:
 
     def get_bluesky_profile(self, handle: str) -> dict:
         """Get data from Bluesky API for a given handle"""
-        data = self.client.get_profile(actor=handle)
+
+        try:
+            data = self.client.get_profile(actor=handle)
+        except BadRequestError as e:
+            print(f"Error fetching data for {handle}: {e}")
+            return {
+                "did": None,
+                "display_name": None,
+                "created_at": None,
+                "posts_count": None,
+                "followers_count": None,
+            }
 
         return {
             "did": data.did,
