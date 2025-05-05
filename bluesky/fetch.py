@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 
 from atproto import Client
 from atproto_client.exceptions import BadRequestError
@@ -16,13 +17,17 @@ class BlueskyFetcher:
         self.output_dir = OUTPUT_DIR
         self.output_filename = OUTPUT_FILENAME
 
-    def get_bluesky_profile(self, handle: str) -> dict:
-        """Get data from Bluesky API for a given handle"""
+    def get_bluesky_profile(self, did: Optional[str], handle: Optional[str]) -> dict:
+        """Get data from Bluesky API for a given identifier (did) or handle"""
+        if did is None and handle is None:
+            raise ValueError("Either handle or did must be provided.")
 
         try:
-            data = self.client.get_profile(actor=handle)
+            data = self.client.get_profile(actor=did if not pd.isna(did) else handle)
         except BadRequestError as e:
-            print(f"Error fetching data for {handle}: {e}")
+            print(
+                f"Error fetching data for {handle} (did:{did}): {e}"  # noqa: E231, E501 https://github.com/PyCQA/pycodestyle/issues/1241
+            )
             return {
                 "did": None,
                 "display_name": None,
@@ -50,7 +55,7 @@ class BlueskyFetcher:
                 "followers_count",
             ]
         ] = df.apply(
-            lambda x: self.get_bluesky_profile(x["handle"]),
+            lambda x: self.get_bluesky_profile(x["did"], x["handle"]),
             axis="columns",
             result_type="expand",
         )
