@@ -1,7 +1,6 @@
 import os
 
 from atproto import Client
-from atproto_client.models.app.bsky.actor.defs import ProfileViewDetailed
 import pandas as pd
 
 OUTPUT_DIR = "data"
@@ -16,7 +15,7 @@ class BlueskyFetcher:
         self.output_dir = OUTPUT_DIR
         self.output_filename = OUTPUT_FILENAME
 
-    def get_bluesky_profile(self, handle: str) -> ProfileViewDetailed:
+    def get_bluesky_profile(self, handle: str) -> dict:
         """Get data from Bluesky API for a given handle"""
         data = self.client.get_profile(actor=handle)
 
