@@ -17,35 +17,6 @@ class BlueskyFetcher:
         self.output_dir = OUTPUT_DIR
         self.output_filename = OUTPUT_FILENAME
 
-    def get_bluesky_profile(self, did: Optional[str], handle: Optional[str]) -> dict:
-        """Get data from Bluesky API for a given identifier (did) or handle"""
-        if did is None and handle is None:
-            raise ValueError("Either handle or did must be provided.")
-
-        try:
-            data = self.client.get_profile(actor=did if not pd.isna(did) else handle)
-        except BadRequestError as e:
-            print(
-                f"Error fetching data for {handle} (did:{did}): {e}"  # noqa: E231, E501 https://github.com/PyCQA/pycodestyle/issues/1241
-            )
-            return {
-                "display_name": None,
-                "handle": None,
-                "did": None,
-                "created_at": None,
-                "posts_count": None,
-                "followers_count": None,
-            }
-
-        return {
-            "display_name": data.display_name,
-            "handle": data.handle,
-            "did": data.did,
-            "created_at": data.created_at,
-            "posts_count": data.posts_count,
-            "followers_count": data.followers_count,
-        }
-
     def download_bluesky_data(self, df_input: pd.DataFrame) -> pd.DataFrame:
         """Retrieve Bluesky data for rows of a df and save to CSV"""
         results = df_input.apply(
@@ -78,3 +49,32 @@ class BlueskyFetcher:
         print(f"Follower data saved at {output_path}")
 
         return df_input_edited
+
+    def get_bluesky_profile(self, did: Optional[str], handle: Optional[str]) -> dict:
+        """Get data from Bluesky API for a given identifier (did) or handle"""
+        if did is None and handle is None:
+            raise ValueError("Either handle or did must be provided.")
+
+        try:
+            data = self.client.get_profile(actor=did if not pd.isna(did) else handle)
+        except BadRequestError as e:
+            print(
+                f"Error fetching data for {handle} (did:{did}): {e}"  # noqa: E231, E501 https://github.com/PyCQA/pycodestyle/issues/1241
+            )
+            return {
+                "display_name": None,
+                "handle": None,
+                "did": None,
+                "created_at": None,
+                "posts_count": None,
+                "followers_count": None,
+            }
+
+        return {
+            "display_name": data.display_name,
+            "handle": data.handle,
+            "did": data.did,
+            "created_at": data.created_at,
+            "posts_count": data.posts_count,
+            "followers_count": data.followers_count,
+        }
