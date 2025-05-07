@@ -29,47 +29,52 @@ class BlueskyFetcher:
                 f"Error fetching data for {handle} (did:{did}): {e}"  # noqa: E231, E501 https://github.com/PyCQA/pycodestyle/issues/1241
             )
             return {
-                "did": None,
                 "display_name": None,
+                "handle": None,
+                "did": None,
                 "created_at": None,
                 "posts_count": None,
                 "followers_count": None,
             }
 
         return {
-            "did": data.did,
             "display_name": data.display_name,
+            "handle": data.handle,
+            "did": data.did,
             "created_at": data.created_at,
             "posts_count": data.posts_count,
             "followers_count": data.followers_count,
         }
 
-    def download_bluesky_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def download_bluesky_data(self, df_input: pd.DataFrame) -> pd.DataFrame:
         """Retrieve Bluesky data for rows of a df and save to CSV"""
-        df[
-            [
-                "did",
-                "display_name",
-                "created_at",
-                "posts_count",
-                "followers_count",
-            ]
-        ] = df.apply(
+        results = df_input.apply(
             lambda x: self.get_bluesky_profile(x["did"], x["handle"]),
             axis="columns",
             result_type="expand",
         )
 
+        df_input_edited = results[
+            [
+                "display_name",
+                "handle",
+                "did",
+            ]
+        ]
+        df_followers = results
+
         # Add current date
-        df["date"] = pd.Timestamp.now().date()
+        df_followers["date"] = pd.Timestamp.now().date()
 
         # Save to CSV
         os.makedirs(self.output_dir, exist_ok=True)
         output_path = os.path.join(self.output_dir, self.output_filename)
-        df.to_csv(
+        df_followers.to_csv(
             output_path,
             index=False,
             mode="a",
             header=not os.path.exists(output_path),
         )
-        print(f"Data saved at {output_path}")
+        print(f"Follower data saved at {output_path}")
+
+        return df_input_edited

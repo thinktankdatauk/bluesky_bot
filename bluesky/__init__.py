@@ -15,4 +15,7 @@ def fetch_bluesky_data() -> None:
     fetcher = BlueskyFetcher(client)
     input_path = os.path.join(INPUT_DIR, INPUT_FILENAME)
     df_thinktanks = pd.read_csv(input_path)
-    fetcher.download_bluesky_data(df_thinktanks)
+    df_thinktanks_edited = fetcher.download_bluesky_data(df_thinktanks)
+    if not df_thinktanks.equals(df_thinktanks_edited):
+        df_thinktanks_edited.to_csv(input_path, index=False)
+        print(f"Updated input data saved at {input_path}")
