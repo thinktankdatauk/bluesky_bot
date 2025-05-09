@@ -24,7 +24,7 @@ You can easily create your own bot based on this one following the steps below. 
 ## Generate bump chart (from fake data currently)
 1. From the project root directory
 2. Run `python generate_chart.py`
-3. View image in `./images`
+3. View image in [`/images`](./images)
 
 ## Pull in Bluesky follower counts
 1. From the project root directory, run `python call_api.py`
