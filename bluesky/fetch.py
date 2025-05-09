@@ -6,7 +6,7 @@ from atproto_client.exceptions import BadRequestError
 import pandas as pd
 
 OUTPUT_DIR = "data"
-OUTPUT_FILENAME = "thinktanks_bluesky_data.csv"
+OUTPUT_FILENAME = "follower_counts.csv"
 
 
 class BlueskyFetcher:

@@ -6,7 +6,7 @@ from .client import authenticate
 from .fetch import BlueskyFetcher
 
 INPUT_DIR = "data"
-INPUT_FILENAME = "thinktanks_list.csv"
+INPUT_FILENAME = "account_list.csv"
 
 
 def fetch_bluesky_data() -> None:

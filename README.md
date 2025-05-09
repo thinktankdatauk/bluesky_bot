@@ -28,4 +28,4 @@ You can easily create your own bot based on this one following the steps below. 
 
 ## Pull in Bluesky follower counts
 1. From the project root directory, run `python call_api.py`
-1. View data in `./data/thinktanks_bluesky_data.csv`
+1. View data in `./data/follower_counts.csv`
