@@ -17,7 +17,7 @@ You can easily create your own bot based on this one following the steps below. 
 1. **Configure GitHub Actions** Modify [call_api.yaml](.github\workflows\call_api.yaml) - a YAML file that controls how the bot should run on GitHub Actions. By changing the `cron` line you can change the frequency with which the bot calls pulls in data using the Bluesky API (a handy tool for working out how to set `cron` schedules is [Crontab Guru](https://crontab.guru/)).
 1. **List accounts to be monitored in [`account_list.csv`](/data/account_list.csv)** List the Bluesky accounts to be reported on. Columns are as follows:
     - `display_name` (optional): Display name for the account
-    - `handle` (optional*): Handle for the acount
+    - `handle` (optional*): Handle for the account
     - `did` (optional*): Unique [`atproto` identifier](https://atproto.com/specs/did_) for the account
 
     *Either `handle` or `did` must be supplied for any account
